@@ -22,3 +22,7 @@ function Component() {
     click: () => setCount(count + 1),
   };
 }
+// bug: logging state getter not state
+var App = React.render(Component);
+App.click();
+var App = React.render(Component);
