@@ -7,7 +7,12 @@ const React = (function () {
     const setState = (newVal) => (_val = newVal);
     return [state, setState];
   }
-  return { useState };
+  function render(Component) {
+    const C = Component();
+    C.render();
+    return C;
+  }
+  return { useState, render };
 })();
 
 function Component() {
@@ -17,7 +22,3 @@ function Component() {
     click: () => setCount(count + 1),
   };
 }
-
-console.log(count());
-setCount(2);
-console.log(count());
