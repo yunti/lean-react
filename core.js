@@ -1,9 +1,9 @@
 "use strict";
 
 const React = (function () {
+  let _val;
   function useState(initVal) {
-    let _val = initVal;
-    const state = () => _val;
+    const state = _val || initVal;
     const setState = (newVal) => (_val = newVal);
     return [state, setState];
   }
