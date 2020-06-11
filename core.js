@@ -1,13 +1,17 @@
 "use strict";
 
 const React = (function () {
-  let _val;
+  let hooks = [];
+  let idx = 0;
   function useState(initVal) {
-    const state = _val || initVal;
-    const setState = (newVal) => (_val = newVal);
+    const state = hooks[idx] || initVal;
+    const _idx = idx;
+    const setState = (newVal) => (hooks[_idx] = newVal);
+    idx++;
     return [state, setState];
   }
   function render(Component) {
+    idx = 0;
     const C = Component();
     C.render();
     return C;
@@ -24,7 +28,7 @@ function Component() {
     type: (word) => setText(word),
   };
 }
-// bug: setText reuses state from setCount
+
 var App = React.render(Component);
 App.click();
 var App = React.render(Component);
